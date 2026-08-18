@@ -43,7 +43,10 @@ if submitted:
         st.metric("Forecasted consumption (tonnes)", f"{result['forecasted_consumption']:.2f}")
         st.caption(f"{result['site_id']} - week ending {result['week_ending']}")
     except urllib.error.HTTPError as e:
-        detail = json.loads(e.read())
-        st.error(detail.get("detail", "Request failed"))
+        try:
+            detail = json.loads(e.read()).get("detail", "Request failed")
+        except json.JSONDecodeError:
+            detail = f"Request failed with status {e.code}"
+        st.error(detail)
     except urllib.error.URLError as e:
         st.error(f"Could not reach the forecasting API at {API_URL}: {e.reason}")
