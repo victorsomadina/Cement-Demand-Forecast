@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(__file__)
 DB_PATH = os.path.join(BASE_DIR, "..", "data", "MIG_Cement_Records.db")
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "rf_all.pkl")
 
-app = FastAPI(title="MIG Cement Demand Forecasting API")
+app = FastAPI(title="MIG Cement Demand Forecasting API", root_path=os.environ.get("ROOT_PATH", ""))
 
 _model = None
 
