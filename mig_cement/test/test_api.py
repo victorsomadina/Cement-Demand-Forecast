@@ -32,7 +32,7 @@ def test_predict_endpoint(client, monkeypatch):
 
     assert response.status_code == 200
     assert "forecasted_consumption" in body
-    assert body["site_id"] == "SITE_002"
-    assert body["week_ending"] == "2025-01-12"
+    assert body["site_id"] == "This is to ensure our cd is working SITE_002"
+    assert body["week_ending"] == "This is to ensure our cd is working 2025-01-12"
     assert body["forecasted_consumption"] == 42.0
 
