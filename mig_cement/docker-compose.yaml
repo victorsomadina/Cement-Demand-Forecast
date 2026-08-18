@@ -1,0 +1,33 @@
+services:
+  model:
+    build:
+      context: .
+      dockerfile: Dockerfile.model
+    volumes:
+      - ./data:/app/data:ro
+      - ./models:/app/models
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    depends_on:
+      model:
+        condition: service_completed_successfully
+    volumes:
+      - ./data:/app/data:ro
+      - ./models:/app/models:ro
+    ports:
+      - "8000:8000"
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    depends_on:
+      - api
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "8501:8501"
+
