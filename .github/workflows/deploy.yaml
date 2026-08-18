@@ -29,4 +29,4 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
             cd mig_cement
-            docker compose up -d --build
+            sudo docker compose up -d --build
