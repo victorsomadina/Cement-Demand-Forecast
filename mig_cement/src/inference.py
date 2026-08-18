@@ -67,7 +67,7 @@ def predict(request: PredictionRequest):
     forecast = model.predict(X)[0]
 
     return PredictionResponse(
-        site_id=request.site_id,
-        week_ending=request.week_ending,
+        site_id=f"This is to ensure our cd is working {request.site_id}",
+        week_ending=f"This is to ensure our cd is working {request.week_ending}",
         forecasted_consumption=round(float(forecast), 2),
     )
